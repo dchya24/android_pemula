@@ -1,11 +1,10 @@
-package com.dchya24.submission1
+package com.dchya24.submission1.MainActivity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
+import com.dchya24.submission1.R
 import com.dchya24.submission1.models.League
-import org.jetbrains.anko.*
-import org.jetbrains.anko.recyclerview.v7.recyclerView
+import org.jetbrains.anko.setContentView
 
 class MainActivity : AppCompatActivity() {
     private var items: MutableList<League> = mutableListOf()
@@ -13,22 +12,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initData()
-
-        verticalLayout{
-
-            recyclerView{
-                lparams(width = matchParent, height = wrapContent)
-                topPadding = dip(8)
-                leftPadding = dip(8)
-                rightPadding = dip(8)
-
-                layoutManager = GridLayoutManager(context, 2)
-                adapter = LeagueAdapter(items){
-                    startActivity(intentFor<LeagueDetailActivity>("league" to it))
-                }
-
-            }.lparams(width = matchParent, height = wrapContent)
-        }
+        MainActivityUI(items).setContentView(this)
     }
 
     private fun initData(){
