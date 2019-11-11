@@ -1,9 +1,8 @@
-package com.dchya24.submission1.LeagueDetail
+package com.dchya24.submission1.leaguedetail
 
 import android.graphics.Typeface
 import android.view.Gravity
 import android.view.View
-import com.bumptech.glide.Glide
 import com.dchya24.submission1.R
 import com.dchya24.submission1.models.League
 import org.jetbrains.anko.*

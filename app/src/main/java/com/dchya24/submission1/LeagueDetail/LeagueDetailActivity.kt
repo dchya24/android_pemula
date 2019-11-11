@@ -1,4 +1,4 @@
-package com.dchya24.submission1.LeagueDetail
+package com.dchya24.submission1.leaguedetail
 
 import android.os.Bundle
 import android.widget.ImageView
@@ -12,7 +12,7 @@ import org.jetbrains.anko.setContentView
 class LeagueDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // create oarcelable data
+        // create parcelable data
         val league: League = intent.getParcelableExtra("league")
 
         LeagueDetailActivityUI(league).setContentView(this)
