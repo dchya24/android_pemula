@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.dchya24.submission1.R
-import com.dchya24.submission1.models.BothTeamBadges
 import com.dchya24.submission1.models.Match
 import com.dchya24.submission1.models.MatchDiscover
 import com.dchya24.submission1.models.Team

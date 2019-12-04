@@ -18,7 +18,7 @@ class MatchDetailViewModel(application: Application) : AndroidViewModel(applicat
     private val matchDetailRepository = MatchRepository(this)
 
     override fun handleError(t: Throwable) {
-        Log.e("MatchDetaiLViewModel", t.message)
+        Log.e("MatchDetailViewModel", t.message)
     }
 
     private var matchDetailLiveData =  MutableLiveData<MatchDetailResponse>()

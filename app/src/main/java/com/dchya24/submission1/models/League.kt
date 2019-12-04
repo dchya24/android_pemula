@@ -7,4 +7,4 @@ import kotlinx.android.parcel.Parcelize
 data class League(
     val id: String?,
     val name: String?,
-    val logo: Int?) : Parcelable {}
+    val logo: Int?) : Parcelable

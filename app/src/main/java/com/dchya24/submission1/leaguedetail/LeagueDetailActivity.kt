@@ -12,7 +12,6 @@ import com.dchya24.submission1.models.LeagueDetail
 import kotlinx.android.synthetic.main.activity_league_detail.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
-import org.jetbrains.anko.yesButton
 
 class LeagueDetailActivity : AppCompatActivity(), LeagueDetailViewModel.ViewLayout {
     override fun setError(t: Throwable) {

@@ -1,6 +1,5 @@
 package com.dchya24.submission1.repository
 
-import android.util.Log
 import com.dchya24.submission1.api.DbSportApiService
 import com.dchya24.submission1.models.response.LeagueResponse
 import retrofit2.Call
