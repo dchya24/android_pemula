@@ -29,6 +29,7 @@ class LeagueAdapter(
         return leagueList.size
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(leagueList[position], listener)
     }

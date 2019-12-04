@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
+
+    <LinearLayout
+        android:id="@+id/matchDetailHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:gravity="center_horizontal">
+
+        <include
+            layout="@layout/home_team" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvHomeScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/match_score"
+                android:textStyle="bold"
+                android:textSize="32sp"/>
+
+            <TextView
+                android:id="@+id/tvStrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/strip"
+                android:textStyle="bold"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textSize="32sp"/>
+
+            <TextView
+                android:id="@+id/tvAwayScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/match_score"
+                android:textStyle="bold"
+                android:textSize="32sp"/>
+
+        </LinearLayout>
+        <include
+            layout="@layout/away_team" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pbMatchHeader"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center"/>
+
+</androidx.cardview.widget.CardView>
