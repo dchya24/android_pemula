@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.dchya24.submission1.Adapter.MatchPagerAdapter
 import com.dchya24.submission1.R
+import com.dchya24.submission1.models.League
 import com.dchya24.submission1.models.LeagueDetail
 import kotlinx.android.synthetic.main.activity_league_detail.*
 import org.jetbrains.anko.alert
@@ -20,14 +21,14 @@ class LeagueDetailActivity : AppCompatActivity(), LeagueDetailViewModel.ViewLayo
         }
     }
 
-    private var leagueId: Int = 0
+    private lateinit var leagueDiscover: League
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_league_detail)
-        leagueId = intent.getIntExtra("leagueId", 0)
+        leagueDiscover = intent.getParcelableExtra("league")
 
-        MatchPager.adapter = MatchPagerAdapter(supportFragmentManager, leagueId)
+        MatchPager.adapter = MatchPagerAdapter(supportFragmentManager, leagueDiscover.id!!.toInt())
         tabMatch.setupWithViewPager(MatchPager)
 
         hideView()
@@ -38,7 +39,7 @@ class LeagueDetailActivity : AppCompatActivity(), LeagueDetailViewModel.ViewLayo
             .get(LeagueDetailViewModel::class.java)
         leagueDetailViewModel.setInterface(this)
 
-        leagueDetailViewModel.setLeagueData(leagueId)
+        leagueDetailViewModel.setLeagueData(leagueDiscover.id!!.toInt())
         leagueDetailViewModel.getLeagueData()
             .observe(this,
                 Observer<LeagueDetail>{ leagueDetail ->
@@ -54,6 +55,7 @@ class LeagueDetailActivity : AppCompatActivity(), LeagueDetailViewModel.ViewLayo
     private fun setDataView(league: LeagueDetail){
         supportActionBar?.title = league.name
         tvLeagueName.text = league.name
+        tvLeagueDesc.text = leagueDiscover.description
         Glide.with(this).load(league.logo)
             .into(imgLeagueLogo)
         Glide.with(this).load(league.trophy)
@@ -63,17 +65,20 @@ class LeagueDetailActivity : AppCompatActivity(), LeagueDetailViewModel.ViewLayo
 
     private fun hideView(){
         pbLeagueDetail.visibility = View.VISIBLE
+        svLeagueDetail.visibility = View.INVISIBLE
         tvLeagueName.visibility = View.INVISIBLE
         imgLeagueLogo.visibility = View.INVISIBLE
         imgLeagueTrophy.visibility = View.INVISIBLE
+        tvLeagueDesc.visibility = View.INVISIBLE
     }
 
     private fun showView(){
         pbLeagueDetail.visibility = View.INVISIBLE
+        svLeagueDetail.visibility = View.VISIBLE
         tvLeagueName.visibility = View.VISIBLE
         imgLeagueLogo.visibility = View.VISIBLE
         imgLeagueTrophy.visibility = View.VISIBLE
-
+        tvLeagueDesc.visibility = View.VISIBLE
     }
 
 }

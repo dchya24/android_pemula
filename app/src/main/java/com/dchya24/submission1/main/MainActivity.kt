@@ -35,9 +35,10 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         val leagueName = resources.getStringArray(R.array.league_name)
         val leagueId = resources.getStringArray(R.array.league_id)
         val leagueLogo = resources.obtainTypedArray(R.array.league_logo)
+        val leagueDesc = resources.getStringArray(R.array.league_description)
 
         for (i in leagueName.indices) {
-            val leagueItem = League(leagueId[i], leagueName[i], leagueLogo.getResourceId(i, 0))
+            val leagueItem = League(leagueId[i], leagueName[i], leagueDesc[i], leagueLogo.getResourceId(i, 0))
             items.add(leagueItem)
         }
         leagueLogo.recycle()

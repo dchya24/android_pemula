@@ -20,7 +20,7 @@ class MainActivityUI(private val items: MutableList<League>): AnkoComponent<Main
 
                     layoutManager = GridLayoutManager(context, 2)
                     adapter = LeagueAdapter(items) {
-                        startActivity<LeagueDetailActivity>("leagueId" to it.id?.toInt())
+                        startActivity<LeagueDetailActivity>("league" to it)
                     }
 
                 }.lparams(width = matchParent, height = wrapContent)
