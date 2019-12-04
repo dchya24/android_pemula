@@ -5,14 +5,10 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.dchya24.submission1.models.BothTeamBadges
 import com.dchya24.submission1.models.Match
-import com.dchya24.submission1.models.MatchDetail
 import com.dchya24.submission1.models.Team
 import com.dchya24.submission1.models.response.MatchDetailResponse
 import com.dchya24.submission1.repository.MatchRepository
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class MatchDetailViewModel(application: Application) : AndroidViewModel(application), MatchRepository.MatchRepoInterface{
     private val matchDetailRepository = MatchRepository(this)
