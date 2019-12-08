@@ -9,7 +9,7 @@ import com.dchya24.submission1.models.response.LeagueResponse
 import com.dchya24.submission1.repository.DetailLeagueRepository
 
 class LeagueDetailViewModel(application: Application): AndroidViewModel(application), DetailLeagueRepository.detailLeague {
-    private var leagueDetailLiveData = MutableLiveData<LeagueDetail>()
+    private val leagueDetailLiveData = MutableLiveData<LeagueDetail>()
     private lateinit var viewLayout: ViewLayout
 
     fun setLeagueData(id: Int){

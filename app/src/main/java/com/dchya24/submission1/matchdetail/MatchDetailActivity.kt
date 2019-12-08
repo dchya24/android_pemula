@@ -17,8 +17,13 @@ import kotlinx.android.synthetic.main.match_detail_header.*
 import kotlinx.android.synthetic.main.match_red_card.*
 import kotlinx.android.synthetic.main.match_score.*
 import kotlinx.android.synthetic.main.match_yellow_card.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.toast
 
-class MatchDetailActivity : AppCompatActivity() {
+class MatchDetailActivity : AppCompatActivity(), MatchDetailViewModel.MatchDetailVM {
+
+    private lateinit var matchDetailViewModel: MatchDetailViewModel
+    private lateinit var matchDiscover: MatchDiscover
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,18 +31,19 @@ class MatchDetailActivity : AppCompatActivity() {
         supportActionBar?.title = "Match Detail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val match: MatchDiscover = intent.getParcelableExtra("match")
+        matchDiscover = intent.getParcelableExtra("match")
 
-        tvHomeScore.text = match.getScoreHome()
-        tvAwayScore.text = match.getScoreAway()
-        tvHomeName.text = match.homeTeam
-        tvAwayName.text = match.awayTeam
+        tvHomeScore.text = matchDiscover.getScoreHome()
+        tvAwayScore.text = matchDiscover.getScoreAway()
+        tvHomeName.text = matchDiscover.homeTeam
+        tvAwayName.text = matchDiscover.awayTeam
         hideView()
 
-        val matchDetailViewModel = ViewModelProviders.of(this)
+        matchDetailViewModel = ViewModelProviders.of(this)
             .get(MatchDetailViewModel::class.java)
+        matchDetailViewModel.setMatchDetailVM(this)
 
-        matchDetailViewModel.setMatchDetail(match.id)
+        matchDetailViewModel.setMatchDetail(matchDiscover.id)
 
         matchDetailViewModel.getMatchDetail()
             .observe(this, Observer<Match>{
@@ -45,15 +51,17 @@ class MatchDetailActivity : AppCompatActivity() {
                 showView()
             })
 
-        matchDetailViewModel.getTeamBadge(match.awayTeamId)
+        matchDetailViewModel.getTeamBadge(matchDiscover.awayTeamId)
             .observe(this, Observer<Team>{
                 Glide.with(this).load(it.badge).into(imgAwayLogo)
             })
 
-        matchDetailViewModel.getTeamBadge(match.homeTeamId)
+        matchDetailViewModel.getTeamBadge(matchDiscover.homeTeamId)
             .observe(this, Observer<Team>{
                 Glide.with(this).load(it.badge).into(imgHomeLogo)
             })
+
+        matchDetailViewModel.isFavorite(matchDiscover.id)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -75,6 +83,8 @@ class MatchDetailActivity : AppCompatActivity() {
         pbMatchBody.visibility = View.VISIBLE
         matchDetailHeader.visibility = View.INVISIBLE
         matchDetailBody.visibility = View.INVISIBLE
+        fabFavorite.hide()
+
     }
 
     private fun showView(){
@@ -82,5 +92,40 @@ class MatchDetailActivity : AppCompatActivity() {
         pbMatchBody.visibility = View.INVISIBLE
         matchDetailHeader.visibility = View.VISIBLE
         matchDetailBody.visibility = View.VISIBLE
+        fabFavorite.show()
+    }
+
+
+    override fun setIsFavorite(favorite: Int) {
+        if(favorite == 0){
+            changeFavoriteIcon(false)
+        }else{
+            changeFavoriteIcon(true)
+        }
+    }
+
+    override fun setError(error: String) {
+        alert {
+            title = "Error"
+            message = error
+        }
+    }
+
+    override fun changeFavoriteIcon(favorite: Boolean) {
+        if(favorite){
+            fabFavorite.setImageResource(R.drawable.ic_favorite_black_24dp)
+            fabFavorite.setOnClickListener{
+                matchDetailViewModel.deleteFavorite(matchDiscover.id)
+            }
+        }else{
+            fabFavorite.setImageResource(R.drawable.ic_favorite_border_black_24dp)
+            fabFavorite.setOnClickListener{
+                matchDetailViewModel.insertFavorite(matchDiscover)
+            }
+        }
+    }
+
+    override fun setToast(message: String) {
+        toast(message)
     }
 }

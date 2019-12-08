@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
-import com.dchya24.submission1.Adapter.MatchPagerAdapter
+import com.dchya24.submission1.adapter.MatchPagerAdapter
 import com.dchya24.submission1.R
 import com.dchya24.submission1.models.League
 import com.dchya24.submission1.models.LeagueDetail

@@ -1,6 +1,5 @@
 package com.dchya24.submission1.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.dchya24.submission1.api.DbSportApiService
 import com.dchya24.submission1.models.Team
@@ -11,7 +10,6 @@ import com.dchya24.submission1.models.response.TeamResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 class MatchRepository(val matchRepoInterface: MatchRepoInterface){
     private val mutableMatchResponse = MutableLiveData<MatchDiscoverResponse>()
@@ -70,7 +68,6 @@ class MatchRepository(val matchRepoInterface: MatchRepoInterface){
                     response: Response<SearchMatchsResponse>
                 ) {
                     val data  = response.body()
-                    data!!.events.filter { it.strSport == "Soccer" }
                     searchMatchsLivData.postValue(data)
                 }
             })
@@ -99,7 +96,7 @@ class MatchRepository(val matchRepoInterface: MatchRepoInterface){
     }
 
     fun getTeamBadge(id: Int): MutableLiveData<Team>{
-        var team = MutableLiveData<Team>()
+        val team = MutableLiveData<Team>()
         DbSportApiService()
             .services.getTeamDetail(id)
             .enqueue(object: Callback<TeamResponse>{

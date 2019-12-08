@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dchya24.submission1.Adapter.MatchAdapter
+import com.dchya24.submission1.adapter.MatchAdapter
 import com.dchya24.submission1.R
 import com.dchya24.submission1.matchdetail.MatchDetailActivity
 import com.dchya24.submission1.models.response.MatchDiscoverResponse

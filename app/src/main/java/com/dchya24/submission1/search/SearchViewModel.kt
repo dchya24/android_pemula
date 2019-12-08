@@ -1,27 +1,43 @@
 package com.dchya24.submission1.search
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.ViewModel
 import com.dchya24.submission1.models.MatchDiscover
 import com.dchya24.submission1.repository.MatchRepository
 
-class SearchViewModel: ViewModel(), MatchRepository.MatchRepoInterface{
+class SearchViewModel(application: Application): AndroidViewModel(application), MatchRepository.MatchRepoInterface{
     private val matchRepository = MatchRepository(this)
-    val mldSearchMatch = MediatorLiveData<MutableList<MatchDiscover>>()
+    private val mldSearchMatch = MediatorLiveData<MutableList<MatchDiscover>>()
+    private lateinit var searchVMInterface: SearchVMInterface
+
+    fun setSearchVMInterface(searchVMInterface: SearchVMInterface){
+        this.searchVMInterface = searchVMInterface
+    }
 
     override fun handleError(t: Throwable) {
         Log.e("SearchViewModel", t.message)
     }
 
     fun initSearchMatchList(query: String){
+
         mldSearchMatch.addSource(matchRepository.searchMatchs(query)){
-            mldSearchMatch.value = it.events
+            val data = it.events
+            if(data == null){
+                searchVMInterface.handleNullData()
+            }else{
+                mldSearchMatch.value = data
+            }
         }
     }
 
     fun getSearchMatchList(): MediatorLiveData<MutableList<MatchDiscover>>{
         return mldSearchMatch
+    }
+
+    interface SearchVMInterface{
+        fun handleNullData()
     }
 
 }

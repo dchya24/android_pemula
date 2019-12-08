@@ -1,4 +1,4 @@
-package com.dchya24.submission1.Adapter
+package com.dchya24.submission1.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
