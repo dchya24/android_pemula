@@ -4,10 +4,11 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
+import com.dchya24.submission1.`interface`.MatchRepoInterface
 import com.dchya24.submission1.models.MatchDiscover
 import com.dchya24.submission1.repository.MatchRepository
 
-class SearchViewModel(application: Application): AndroidViewModel(application), MatchRepository.MatchRepoInterface{
+class SearchViewModel(application: Application): AndroidViewModel(application), MatchRepoInterface {
     private val matchRepository = MatchRepository(this)
     private val mldSearchMatch = MediatorLiveData<MutableList<MatchDiscover>>()
     private lateinit var searchVMInterface: SearchVMInterface

@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Top League</string>
     <string name="dummy_name">English Premiere League</string>
-    <string name="league_trophy">League Trophy</string>
     <string name="dummy_desc">"The Premier League (often referred to as the English Premier League (EPL) outside England), is the top level of the English football league system. Contested by 20 clubs, it operates on a system of promotion and relegation with the English Football League (EFL).
 
 The Premier League is a corporation in which the member clubs act as shareholders. Seasons run from August to May with each team playing 38 matches (playing each other home and away). Most games are played on Saturday and Sunday afternoons. The Premier League has featured 47 English and two Welsh clubs since its inception, making it a cross-border league.
@@ -11,8 +10,6 @@ The competition was formed as the FA Premier League on 20 February 1992 followin
 The Premier League is the most-watched sports league in the world, broadcast in 212 territories to 643 million homes and a potential TV audience of 4.7 billion people. In the 2014–15 season, the average Premier League match attendance exceeded 36,000, second highest of any professional football league behind the Bundesliga's 43,500. Most stadium occupancies are near capacity. The Premier League ranks second in the UEFA coefficients of leagues based on performances in European competitions over the past five seasons, as of 2018.
 
 Forty-nine clubs have competed since the inception of the Premier League in 1992. Six of them have won the title: Manchester United (13), Chelsea (5), Arsenal (3), Manchester City (3), Blackburn Rovers (1), and Leicester City (1). Following the 2003–04 season, Arsenal acquired the nickname "The Invincibles" as they became, and still remain, the only club to complete a Premier League campaign without losing a single game. The record of most points in a season is 100 by Manchester City in 2017–18."</string>
-    <string name="last_match">Last Match</string>
-    <string name="next_match">Next match</string>
 
     <string-array name="league_name">
         <item>English Premiere League</item>
@@ -53,7 +50,6 @@ Forty-nine clubs have competed since the inception of the Premier League in 1992
     </array>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_team_logo">Home Team Logo</string>
     <string name="home_team">Home Team</string>
     <string name="away_team">Away Team</string>

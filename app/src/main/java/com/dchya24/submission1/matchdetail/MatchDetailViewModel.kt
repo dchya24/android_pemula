@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import com.dchya24.submission1.`interface`.MatchRepoInterface
 import com.dchya24.submission1.models.Match
 import com.dchya24.submission1.models.MatchDiscover
 import com.dchya24.submission1.models.Team
@@ -16,7 +17,7 @@ import org.jetbrains.anko.noButton
 
 class MatchDetailViewModel(application: Application)
     : AndroidViewModel(application),
-    MatchRepository.MatchRepoInterface{
+    MatchRepoInterface {
 
     private val matchDetailRepository = MatchRepository(this)
     private val favoriteRepository = FavoriteRepository(application)
@@ -58,7 +59,6 @@ class MatchDetailViewModel(application: Application)
     }
 
     fun isFavorite(id: Int){
-        Log.d("MatchDetailVM", "Terpanggil")
         val data = favoriteRepository.getFavoriteMatch(id)
         if(data.error != ""){
             handleFavoriteError(data)
@@ -87,7 +87,7 @@ class MatchDetailViewModel(application: Application)
         }
     }
 
-    fun handleFavoriteError(data: FavoriteRepository.FavoriteHandler){
+    private fun handleFavoriteError(data: FavoriteRepository.FavoriteHandler){
         context.alert {
             title = "Error"
             message = data.error

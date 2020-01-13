@@ -1,6 +1,7 @@
 package com.dchya24.submission1.repository
 
 import androidx.lifecycle.MutableLiveData
+import com.dchya24.submission1.`interface`.MatchRepoInterface
 import com.dchya24.submission1.api.DbSportApiService
 import com.dchya24.submission1.models.Team
 import com.dchya24.submission1.models.response.MatchDetailResponse
@@ -15,7 +16,6 @@ class MatchRepository(val matchRepoInterface: MatchRepoInterface){
     private val mutableMatchResponse = MutableLiveData<MatchDiscoverResponse>()
 
     fun getListLastMatch(id: Int):MutableLiveData<MatchDiscoverResponse>{
-
         DbSportApiService()
             .services.getLastMatch(id)
             .enqueue(object: Callback<MatchDiscoverResponse>{
@@ -34,7 +34,7 @@ class MatchRepository(val matchRepoInterface: MatchRepoInterface){
         return mutableMatchResponse
     }
 
-    fun getNextLastMatch(id: Int):MutableLiveData<MatchDiscoverResponse>{
+    fun getListNextMatch(id: Int):MutableLiveData<MatchDiscoverResponse>{
         DbSportApiService()
             .services.getNextMatch(id)
             .enqueue(object: Callback<MatchDiscoverResponse>{
@@ -54,7 +54,7 @@ class MatchRepository(val matchRepoInterface: MatchRepoInterface){
     }
 
     fun searchMatchs(query: String): MutableLiveData<SearchMatchsResponse>{
-        val searchMatchsLivData = MutableLiveData<SearchMatchsResponse>()
+        val searchMatchLiveData = MutableLiveData<SearchMatchsResponse>()
 
         DbSportApiService()
             .services.searchMatchs(query.replace(" ", "_"))
@@ -68,11 +68,11 @@ class MatchRepository(val matchRepoInterface: MatchRepoInterface){
                     response: Response<SearchMatchsResponse>
                 ) {
                     val data  = response.body()
-                    searchMatchsLivData.postValue(data)
+                    searchMatchLiveData.postValue(data)
                 }
             })
 
-        return searchMatchsLivData
+        return searchMatchLiveData
     }
 
     fun getMatchDetail(id: Int): MutableLiveData<MatchDetailResponse>{
@@ -113,9 +113,5 @@ class MatchRepository(val matchRepoInterface: MatchRepoInterface){
             })
 
         return team
-    }
-
-    interface MatchRepoInterface{
-        fun handleError(t: Throwable)
     }
 }

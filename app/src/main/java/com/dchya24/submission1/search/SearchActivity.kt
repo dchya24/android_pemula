@@ -26,6 +26,7 @@ class SearchActivity : AppCompatActivity(), SearchViewModel.SearchVMInterface{
     }
 
     private lateinit var matchAdapter: MatchAdapter
+    private lateinit var searchViewModel: SearchViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +47,21 @@ class SearchActivity : AppCompatActivity(), SearchViewModel.SearchVMInterface{
         }
 
         hideView()
-        val searchViewModel = ViewModelProviders.of(this)
+        searchViewModel = ViewModelProviders.of(this)
             .get(SearchViewModel::class.java)
         searchViewModel.setSearchVMInterface(this)
 
+        initData(query)
+
+        btnSearch.setOnClickListener {
+            val string = etSearch?.text.toString()
+            matchAdapter.setMatchList(mutableListOf())
+            searchViewModel.initSearchMatchList(string)
+            hideView()
+        }
+    }
+
+    fun initData(query: String){
         searchViewModel.initSearchMatchList(query)
         searchViewModel.getSearchMatchList()
             .observe(this,
@@ -59,12 +71,6 @@ class SearchActivity : AppCompatActivity(), SearchViewModel.SearchVMInterface{
                     mutableList.addAll(searchBySoccer)
                     setData(mutableList)
                 })
-
-        btnSearch.setOnClickListener {
-            val string = etSearch?.text.toString()
-            searchViewModel.initSearchMatchList(string)
-            hideView()
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -83,12 +89,10 @@ class SearchActivity : AppCompatActivity(), SearchViewModel.SearchVMInterface{
 
     private fun hideView(){
         pbSearchMatch.visibility = View.VISIBLE
-        rvMatchList.visibility = View.INVISIBLE
     }
 
     private fun showView(){
         pbSearchMatch.visibility = View.INVISIBLE
-        rvMatchList.visibility = View.VISIBLE
     }
 
 }
