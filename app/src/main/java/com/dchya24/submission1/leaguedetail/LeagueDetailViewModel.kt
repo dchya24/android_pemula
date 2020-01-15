@@ -22,7 +22,7 @@ class LeagueDetailViewModel(application: Application): AndroidViewModel(applicat
     }
 
     fun setLeagueData(id: Int){
-        leagueResponseLiveData = leagueRepository.getDetailLeague(id)
+        leagueRepository.getDetailLeague(id)
     }
 
     fun getLeagueData(): MediatorLiveData<LeagueDetail> {
@@ -37,6 +37,10 @@ class LeagueDetailViewModel(application: Application): AndroidViewModel(applicat
 
     override fun handleError(t: Throwable) {
         viewLayout.setError(t)
+    }
+
+    override fun handleData(leagueResponse: LeagueResponse){
+        leagueResponseLiveData.postValue(leagueResponse)
     }
 
     interface ViewLayout{

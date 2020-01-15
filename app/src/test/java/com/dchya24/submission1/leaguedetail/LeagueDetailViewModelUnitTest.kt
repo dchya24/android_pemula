@@ -2,18 +2,17 @@ package com.dchya24.submission1.leaguedetail
 
 import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.dchya24.submission1.models.LeagueDetail
+import com.dchya24.submission1.models.response.LeagueResponse
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentCaptor
-import org.mockito.Mock
-import org.mockito.Mockito
+import org.mockito.*
 import org.mockito.Mockito.*
-import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -21,7 +20,9 @@ class LeagueDetailViewModelUnitTest {
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
-    private lateinit var viewModel: LeagueDetailViewModel
+    @InjectMocks private var viewModel = LeagueDetailViewModel(Application())
+
+    @Mock private lateinit var leagueResponse: LeagueResponse
 
     @Mock
     private val observer: Observer<LeagueDetail> = mockUp()
@@ -29,16 +30,14 @@ class LeagueDetailViewModelUnitTest {
     @Before
     fun before(){
         MockitoAnnotations.initMocks(this)
-        viewModel = LeagueDetailViewModel(Application())
+        viewModel = spy(LeagueDetailViewModel(Application()))
         viewModel.getLeagueData().observeForever(observer)
     }
 
     @Test
     fun testSetLeagueData(){
-//        val mediatorLiveData = MediatorLiveData<LeagueDetail>()
-
         viewModel.setLeagueData(4328)
-        viewModel.getLeagueData().observeForever(observer)
+        verify(viewModel).handleData(leagueResponse)
 
         val captor = ArgumentCaptor.forClass(LeagueDetail::class.java)
         captor.run {

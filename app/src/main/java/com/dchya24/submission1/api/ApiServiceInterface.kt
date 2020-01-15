@@ -4,7 +4,6 @@ import com.dchya24.submission1.models.response.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
-import retrofit2.http.QueryMap
 
 interface ApiServiceInterface {
     @GET("lookupleague.php")
